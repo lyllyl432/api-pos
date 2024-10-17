@@ -21,7 +21,7 @@ class WarehouseFactory extends Factory
             'warehouse_phone' => fake()->phoneNumber(),
             'warehouse_country' => fake()->country(),
             'warehouse_email' => fake()->companyEmail(),
-            'warehouse_zipcode' => fake()->swiftBicNumber(),
+            'warehouse_zipcode' => fake()->buildingNumber,
             'warehouse_city' => fake()->country()
         ];
     }

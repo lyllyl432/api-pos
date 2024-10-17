@@ -26,4 +26,9 @@ class Product extends Model
     {
         return $this->belongsTo(Unit::class);
     }
+
+    public function warehouse(): BelongsTo
+    {
+        return $this->belongsTo(Warehouse::class);
+    }
 }
