@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/setup', function (Request $request) {
     $credentials = [
-        'email' => 'admin22@admin.com',
+        'email' => 'admin223@admin.com',
         'password' => 'password'
     ];
 
