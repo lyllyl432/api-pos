@@ -20,4 +20,5 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers', 'middlewa
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('brands', BrandController::class);
     Route::post('orders/bulk', ['uses' => 'OrderController@bulkStore']);
+    Route::post('cart', ['uses' => 'ProductController@cartProducts']);
 });
