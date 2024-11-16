@@ -6,7 +6,10 @@ use App\Http\Requests\StoreCartRequest;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Resources\BrandCollection;
+use App\Http\Resources\CartCollection;
 use App\Http\Resources\ProductCollection;
+use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
@@ -35,10 +38,10 @@ class ProductController extends Controller
     public function cartProducts(StoreCartRequest $request)
     {
         $validated = $request->validated();
-        $carts = Category::with('products')->whereHas('products', function ($query) use ($validated) {
-            $query->whereIn("id", $validated['id']);
+        $carts = Brand::with('products')->whereHas('products', function ($query) use ($validated) {
+            $query->whereIn("id", $validated['product_id']);
         })->get();
-        return $carts;
+        return new CartCollection($carts);
     }
 
     /**
