@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreOrderRequest extends FormRequest
+class StoreOrderItemsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,6 +15,7 @@ class StoreOrderRequest extends FormRequest
         return $user != null && $user->tokenCan('create');
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,13 +24,11 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            '*.user_id' => ['required', 'integer'],
-            '*.total_quantity' => ['required', 'integer'],
-            '*.status' => ['required', Rule::in(['P', 'S', 'C'])],
-            '*.shipping_fee' => ['required', 'integer'],
-            '*.total_amount' => ['required', 'integer'],
-            '*.created_at' => ['required', 'date_format:Y-m-d H:i:s'],
-            '*.updated_at' => ['date_format:Y-m-d H:i:s', 'nullable']
+            '*.sub_total' => ['required', 'integer'],
+            '*.order_id' => ['required', 'integer'],
+            '*.price' => ['required', 'integer'],
+            '*.product_id' => ['required', 'integer'],
+            '*.quantity' => ['required', 'integer'],
         ];
     }
 

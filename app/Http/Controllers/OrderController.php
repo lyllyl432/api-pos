@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrderItemsRequest;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Resources\OrderCollection;
+use App\Models\OrderItem;
 use Illuminate\Support\Arr;
 
 class OrderController extends Controller
@@ -31,12 +33,25 @@ class OrderController extends Controller
      */
     // public function store(StoreOrderRequest $request) {}
 
-    public function bulkStore(StoreOrderRequest $request)
+    public function bulkOrderStore(StoreOrderRequest $request)
+    {
+        $orderId = [];
+        $bulk = collect($request->all())->map(function ($arr, $key) {
+            return $arr;
+        });
+        foreach ($bulk as $orderData) {
+            $order = Order::create($orderData);
+            $orderId[] = $order->id;
+        }
+        return response()->json(['order_id' => $orderId]);
+    }
+
+    public function bulkOrderItemStore(StoreOrderItemsRequest $request)
     {
         $bulk = collect($request->all())->map(function ($arr, $key) {
-            return Arr::except($arr, ['productId', 'totalCost', 'createdAt', 'updatedAt']);
+            return $arr;
         });
-        Order::insert($bulk->toArray());
+        OrderItem::insert($bulk->toArray());
     }
 
     /**
