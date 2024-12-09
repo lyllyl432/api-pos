@@ -31,9 +31,13 @@ class Product extends Model
     {
         return $this->belongsTo(Warehouse::class);
     }
-
-    public function orders(): HasMany
+    public function orders(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Order::class, 'order_items');
+    }
+
+    public function orderItems(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

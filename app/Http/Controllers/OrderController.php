@@ -8,16 +8,21 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Resources\OrderCollection;
 use App\Models\OrderItem;
-use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new OrderCollection(Order::all());
+        $user_id = $request->input('user_id');
+        return new OrderCollection(
+            Order::with(['orderItems', 'orderItems.product'])->where('user_id', $user_id)
+                ->latest()
+                ->paginate(15)
+        );
     }
 
     /**
