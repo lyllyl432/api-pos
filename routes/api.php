@@ -20,6 +20,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers', 'middlewa
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('brands', BrandController::class);
     Route::post('orders/bulk', ['uses' => 'OrderController@bulkOrderStore']);
+    Route::get('orderitems', ['uses' => 'OrderItemController@index']);
     Route::post('orderitems/bulk', ['uses' => 'OrderController@bulkOrderItemStore']);
     Route::post('cart', ['uses' => 'ProductController@cartProducts']);
 });

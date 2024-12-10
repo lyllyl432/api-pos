@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreOrderItemsRequest extends FormRequest
 {
@@ -26,6 +27,8 @@ class StoreOrderItemsRequest extends FormRequest
         return [
             '*.sub_total' => ['required', 'integer'],
             '*.order_id' => ['required', 'integer'],
+            '*.user_id' => ['required', 'integer'],
+            '*.status' => ['required', Rule::in(['pending', 'to_ship', 'to_receive', 'completed', 'cancelled', 'refunded'])],
             '*.price' => ['required', 'integer'],
             '*.product_id' => ['required', 'integer'],
             '*.quantity' => ['required', 'integer'],

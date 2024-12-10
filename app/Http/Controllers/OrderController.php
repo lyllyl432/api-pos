@@ -17,11 +17,23 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
+        $status = $request->input('status');
         $user_id = $request->input('user_id');
-        return new OrderCollection(
-            Order::with(['orderItems', 'orderItems.product'])->where('user_id', $user_id)
+        $order = null;
+        if ($status == "all") {
+            $order = Order::with(['orderItems', 'orderItems.product'])
+                ->where('user_id', $user_id)
                 ->latest()
-                ->paginate(15)
+                ->paginate(15);
+        } else {
+            $order = Order::with(['orderItems', 'orderItems.product'])
+                ->where('user_id', $user_id)
+                ->where('status', $status)
+                ->latest()
+                ->paginate(15);
+        }
+        return new OrderCollection(
+            $order
         );
     }
 
