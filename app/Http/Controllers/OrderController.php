@@ -65,6 +65,7 @@ class OrderController extends Controller
 
     public function bulkOrderItemStore(StoreOrderItemsRequest $request)
     {
+
         $bulk = collect($request->all())->map(function ($arr, $key) {
             return $arr;
         });

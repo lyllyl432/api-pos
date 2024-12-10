@@ -17,10 +17,11 @@ class OrderItemResource extends JsonResource
         return [
             'id' => $this->id,
             'order' => new OrderResource($this->order),
-            'product' => new ProductResource($this->product),
+            'product' => new OrderProductResource($this->product),
             'quantity' => $this->quantity,
             'price' => $this->price,
             'subTotal' => $this->sub_total,
+            'shippingFee' => $this->shipping_fee,
             'status' => $this->status,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,

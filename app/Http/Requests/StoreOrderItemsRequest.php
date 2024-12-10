@@ -30,6 +30,7 @@ class StoreOrderItemsRequest extends FormRequest
             '*.user_id' => ['required', 'integer'],
             '*.status' => ['required', Rule::in(['pending', 'to_ship', 'to_receive', 'completed', 'cancelled', 'refunded'])],
             '*.price' => ['required', 'integer'],
+            '*.shipping_fee' => ['required', 'integer'],
             '*.product_id' => ['required', 'integer'],
             '*.quantity' => ['required', 'integer'],
         ];

@@ -23,9 +23,7 @@ class OrderItemController extends Controller
         if ($status && $status !== 'all') {
             $query->where('status', $status);
         }
-
         // Get the results and group them
-        $orderItems = $query->get();
         $orderItems = $query->get();
         $groupedItems = $orderItems->groupBy('product.brand.brand_name')
             ->map(function ($items, $brandName) {

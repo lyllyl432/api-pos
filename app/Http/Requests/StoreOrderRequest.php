@@ -25,7 +25,6 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             '*.total_quantity' => ['required', 'integer'],
-            '*.shipping_fee' => ['required', 'integer'],
             '*.total_amount' => ['required', 'integer'],
             '*.created_at' => ['required', 'date_format:Y-m-d H:i:s'],
             '*.updated_at' => ['date_format:Y-m-d H:i:s', 'nullable']

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('quantity');
             $table->integer('price');
+            $table->integer('shipping_fee');
             $table->enum('status', ['pending', 'to_ship', 'to_receive', 'completed', 'cancelled', 'refunded'])->default('pending');
             $table->integer('sub_total');
             $table->timestamps();
