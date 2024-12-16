@@ -10,8 +10,7 @@ class GroupedOrderItemResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'brand' => $this->resource['brand'],
-            'items' => OrderItemResource::collection($this->resource['items'])
+            'grouped_orders' => $this->resource
         ];
     }
 }

@@ -24,8 +24,12 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            '*.total_quantity' => ['required', 'integer'],
+            '*.id' => ['required', 'integer'],
+            '*.user_id' => ['required', 'integer'],
+            '*.order_number' => ['required', 'string'],
             '*.total_amount' => ['required', 'integer'],
+            '*.status' => ['required', Rule::in(['pending', 'to_ship', 'to_receive', 'completed', 'cancelled', 'refunded'])],
+            '*.shipping_fee' => ['required', 'integer'],
             '*.created_at' => ['required', 'date_format:Y-m-d H:i:s'],
             '*.updated_at' => ['date_format:Y-m-d H:i:s', 'nullable']
         ];

@@ -14,8 +14,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('total_quantity');
+            $table->integer('user_id');
+            $table->string('order_number');
             $table->integer('total_amount');
+            $table->integer('shipping_fee');
+            $table->enum('status', ['pending', 'to_ship', 'to_receive', 'completed', 'cancelled', 'refunded'])->default('pending');
             $table->timestamps();
         });
     }
